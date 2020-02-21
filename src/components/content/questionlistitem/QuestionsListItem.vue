@@ -1,20 +1,18 @@
 <template>
-  <div id="questionsListItem" class="media index-content" >
+  <div id="questionsListItem" class="media index-content">
     <div class="media-left">
       <a href="#">
-        <img class="media-object img-rounded" v-lazy="getImg" :key="getImg">
+        <img class="media-object img-rounded" :src="'static'+ question.user.avatarUrl">
       </a>
     </div>
     <div class="media-body">
-      <a :href="'/question/'+question.id">
+      <a @click="goToQuestion(question.id)">
         <h4 class="media-heading index-content-head">{{question.title}}</h4>
       </a>
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question-tag">
-                        <span class="label label-info index-font-size"
-                              v-for="(tag,index) in question.tag.split(',')">
-                                <span class="glyphicon glyphicon-tags"> </span>
-                                <span>{{tag}}</span>
-                        </span>
+        <span class="label label-info index-font-size" v-for="(tag,index) in question.tag.split(',')">
+            <span class="glyphicon glyphicon-tags"> </span><span>{{tag}}</span>
+        </span>
         <span class="viewfontformat viewfontformat-dot-big">•</span>
         <span class="viewfontformat">{{question.user.name}}发起了问题</span>
         <span class="viewfontformat">•</span>
@@ -22,13 +20,15 @@
         <span class="viewfontformat">•</span>
         <span class="viewfontformat">{{question.viewCount}}次浏览</span>
         <span class="viewfontformat">•</span>
-        <!--          <span class="viewfontformat">{{dates.format(question.gmtModified,'yyyy-MM-dd HH:mm:ss')}}</span>-->
+        <span class="viewfontformat">{{question.gmtModified | dateFormat('YYYY年MM月DD日 HH时mm分ss秒')}}</span>
+        <!--<span class="viewfontformat">{{question.gmtModified | dateFormat('YYYY-MM-DD HH-mm-ss')}}</span>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
   export default {
     name: "QuestionsListItem",
     props: {
@@ -37,21 +37,18 @@
         default: {}
       }
     },
-    computed: {
-      getImg(){
-        console.log(this.question);
-        return this.question.user.avatarUrl
+    methods: {
+      goToQuestion(id) {
+        this.$router.push({
+          path: '/detail',
+          query: {id}
+        })
       }
-    },
+    }
   }
 </script>
 
 <style scoped>
-  .media-object {
-    width: 38px;
-    height: 38px;
-  }
-
   .index-content {
     margin: 0 30px 0 0;
     border-bottom: 1px solid #eeeeee;
