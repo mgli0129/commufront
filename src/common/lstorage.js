@@ -1,5 +1,5 @@
 export class Storage {
-  
+
   constructor(name) {
     this.name = 'storage';
   }
@@ -23,10 +23,7 @@ export class Storage {
       //如果options.expires没有设置，就判断一下value的类型
       let type = Object.prototype.toString.call(options.value);
       //如果value是对象或者数组对象的类型，就先用JSON.stringify转一下，再存进去
-      if (Object.prototype.toString.call(options.value) == '[object Object]') {
-        options.value = JSON.stringify(options.value);
-      }
-      if (Object.prototype.toString.call(options.value) == '[object Array]') {
+      if (type === '[object Object]' || type === '[object Array]') {
         options.value = JSON.stringify(options.value);
       }
       localStorage.setItem(options.name, options.value);
@@ -36,6 +33,12 @@ export class Storage {
   //拿到缓存
   getItem(name) {
     let item = localStorage.getItem(name);
+
+    //如果未设置该token，返回null
+    if (item == null) {
+      return null;
+    }
+
     //先将拿到的试着进行json转为对象的形式
     try {
       item = JSON.parse(item);
@@ -52,7 +55,13 @@ export class Storage {
         localStorage.removeItem(name);
         return false;
       } else {
-        //缓存未过期，返回值
+        //缓存未过期，刷新过期时间
+        // localStorage.removeItem(name);
+        // setItem({
+        //   name: 'Authorization',
+        //   value: name,
+        //   // expires: 1000
+        // });
         return item.value;
       }
     } else {

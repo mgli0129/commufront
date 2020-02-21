@@ -11,11 +11,7 @@ const question = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   getQuestionById(id) {
-    return axios.get( base._commuback_+'/question', {
-      params: {
-        id
-      }
-    })
+    return axios.get(base._commuback_ + '/question/' +id)
   },
 
   /**
@@ -25,8 +21,8 @@ const question = {
    * @param search
    * @returns {Promise<AxiosResponse<T>>}
    */
-  getIndexByPage(pageNum,pageSize,search){
-    return axios.get( base._commuback_+'/', {
+  getIndexByPage(pageNum, pageSize, search) {
+    return axios.get(base._commuback_ + '/', {
       params: {
         pageNum,
         pageSize,
@@ -42,8 +38,8 @@ const question = {
    * @param search
    * @returns {Promise<AxiosResponse<T>>}
    */
-  getQuestionByPage(pageNum,pageSize,search){
-    return axios.get( base._commuback_+'/question/publish', {
+  getQuestionByPage(pageNum, pageSize, search) {
+    return axios.get(base._commuback_ + '/question/publish', {
       params: {
         pageNum,
         pageSize,
@@ -58,8 +54,8 @@ const question = {
    * @param pageSize
    * @returns {Promise<AxiosResponse<T>>}
    */
-  getLatelyReply(pageNum,pageSize){
-    return axios.get( base._commuback_+'/question/reply', {
+  getLatelyReply(pageNum, pageSize) {
+    return axios.get(base._commuback_ + '/question/reply', {
       params: {
         pageNum,
         pageSize
@@ -76,7 +72,7 @@ const question = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   postQuestion(params) {
-    return axios.post('/axios/publish',qs.stringify(params))
+    return axios.post('/axios/publish', qs.stringify(params))
   }
 
 }

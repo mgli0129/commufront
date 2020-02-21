@@ -1,6 +1,6 @@
 <template>
   <div id="questionsListItem" class="media index-content">
-    <div class="media-left">
+    <div class="media-left" v-if="belongsTo()">
       <a href="#">
         <img class="media-object img-rounded" :src="'static'+ question.user.avatarUrl">
       </a>
@@ -14,14 +14,17 @@
             <span class="glyphicon glyphicon-tags"> </span><span>{{tag}}</span>
         </span>
         <span class="viewfontformat viewfontformat-dot-big">•</span>
-        <span class="viewfontformat">{{question.user.name}}发起了问题</span>
-        <span class="viewfontformat">•</span>
+        <span class="viewfontformat" v-if="belongsTo()">{{question.user.name}}发起了问题</span>
+        <span class="viewfontformat" v-if="belongsTo()">•</span>
         <span class="viewfontformat">{{question.commentCount}}个回复</span>
         <span class="viewfontformat">•</span>
         <span class="viewfontformat">{{question.viewCount}}次浏览</span>
         <span class="viewfontformat">•</span>
         <span class="viewfontformat">{{question.gmtModified | dateFormat('YYYY年MM月DD日 HH时mm分ss秒')}}</span>
         <!--<span class="viewfontformat">{{question.gmtModified | dateFormat('YYYY-MM-DD HH-mm-ss')}}</span>-->
+        <a @click="edit()" v-if="editable()"><span
+          class="glyphicon glyphicon-edit edit-dis"></span><span
+          class="viewfontformat ">编辑</span></a>
       </div>
     </div>
   </div>
@@ -35,6 +38,27 @@
       question: {
         type: Object,
         default: {}
+      },
+      common: {
+        type: Object,
+        default: {}
+      },
+      editValue: {
+        type: Boolean,
+        default: false
+      },
+      belongsToValue: {
+        type: String,
+        default: ''
+      }
+
+    },
+    watch: {
+      question: function (newQuestion) {
+        this.question = newQuestion;
+      },
+      editable: function (newValue) {
+        this.editValue = newValue;
       }
     },
     methods: {
@@ -43,6 +67,24 @@
           path: '/detail',
           query: {id}
         })
+      },
+      editable() {
+        return this.editValue != undefined && this.editValue === true
+      },
+      belongsTo() {
+        return this.belongsToValue != "ME";
+      },
+      edit() {
+        let params = {
+          id: this.question.id,
+          common: this.common
+        }
+        this.$router.push(
+          {
+            path: '/publish',
+            query: {params}
+          }
+        )
       }
     }
   }
@@ -54,7 +96,6 @@
     border-bottom: 1px solid #eeeeee;
     padding: 15px 0;
   }
-
 
   .index-font-size {
     font-size: 12px;
@@ -70,10 +111,15 @@
     line-height: 20px;
     font-size: 12px;
     color: #999;
+    margin: 0 1px;
   }
 
   .viewfontformat-dot-big {
-    FONT-SIZE: small;
+    font-size: small;
+  }
+
+  .edit-dis {
+    margin-left: 3px;
   }
 
 </style>

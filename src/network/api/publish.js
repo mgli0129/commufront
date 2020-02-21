@@ -18,6 +18,11 @@ const publish = {
     })
   },
 
+  getSelectedTags(){
+    return axios.get( base._commuback_+'/publish')
+  },
+
+
   /**
    * 提交一个问题
    * @param params
@@ -27,7 +32,7 @@ const publish = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   publishQuestion(params) {
-    return axios.post('/axios/publish',qs.stringify(params))
+    return axios.post(base._commuback_+'/publish',qs.stringify(params))
   }
 
 }

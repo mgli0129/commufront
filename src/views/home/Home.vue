@@ -1,31 +1,29 @@
 <template>
-  <div class="home">
-    <navigation :common="common"></navigation>
+  <div id="home" ref="home">
+    <navigation :common="common" @toSearch="toSearch" @forceReflesh="forceReflesh" @logout="logout"></navigation>
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-1 col-md-1"></div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 main">
           <main-left class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-left" :questions-list="showQuestionsList"
-                     :page-info="showPageInfo"></main-left>
-          <main-right class="col-lg-3 col-md-3 col-sm-12 col-xs-12 main-right" :hot-topics="hotTopics"></main-right>
+                     :page-info="showPageInfo" :common="common" @toPage="toPage"/>
+          <main-right class="col-lg-3 col-md-3 col-sm-12 col-xs-12 main-right" :hot-topics="hotTopics"/>
         </div>
         <div class="col-lg-1 col-md-1"></div>
       </div>
     </div>
     <bottom></bottom>
-
   </div>
 </template>
 
 <script>
-  import Navigation from "./childComps/Navigation";
-  import Bottom from "./childComps/Bottom";
+  import Navigation from "components/content/navigation/Navigation";
+  import Bottom from "components/content/bottom/Bottom";
   import MainLeft from "./childComps/MainLeft";
   import MainRight from "./childComps/MainRight";
 
   export default {
     name: 'Home',
-
     data() {
       return {
         pageNum: 1,
@@ -33,12 +31,8 @@
         search: "",
         common: {},
         pageInfo: {},
+        questionsList: [],
         hotTopics: [],
-        questionsList: {
-          page: 1,
-          list: [],
-          pageInfo: {}
-        }
       }
     },
     components: {
@@ -49,44 +43,47 @@
     },
     computed: {
       showQuestionsList() {
-        return this.questionsList.list;
+        return this.questionsList;
       },
-      showPageInfo(){
-        return this.questionsList.pageInfo;
+      showPageInfo() {
+        return this.pageInfo;
       }
     },
-
     created() {
-      this.showQuestionList();
+      this.loadQuestionList();
     },
     methods: {
-      showQuestionList() {
-        this.$api.question.getIndexByPage(this.pageNum, this.pageSize, this.searchValue).then(res => {
-          this.questionsList.list = res.data.questions;
-          this.questionsList.pageInfo = res.data.pageInfo;
+      loadQuestionList() {
+        this.$api.question.getIndexByPage(this.pageNum, this.pageSize, this.search).then(res => {
+          this.common = res.data.common;
+          this.questionsList = res.data.questions;
+          this.pageInfo = res.data.pageInfo;
           this.search = res.data.search;
           this.hotTopics = res.data.hotTopics;
-          this.common = res.data.common;
+        }).catch(rej => {
         })
+      },
+      toPage(page) {
+        this.pageNum = page;
+        this.loadQuestionList();
+      },
+      toSearch(s) {
+        this.search = s;
+        this.loadQuestionList();
+      },
+      forceReflesh() {
+        this.$nextTick(() => {
+          this.loadQuestionList();
+          // console.log("我已经刷新了首页");
+        })
+      },
+      logout() {
+        this.loadQuestionList();
       }
     }
   }
 </script>
 
 <style scoped>
-
-  .main-left {
-    border-right: 5px solid var(--color-background);
-    padding-left: 15px;
-    padding-right: 0;
-    background-color: var(--color-main);
-  }
-
-  .main-right {
-    padding-left: 0;
-    padding-right: 0;
-    border-left: 5px solid var(--color-background);
-    background-color: var(--color-main);
-  }
 
 </style>

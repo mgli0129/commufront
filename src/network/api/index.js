@@ -10,6 +10,7 @@ import notification from "./notification";
 import publish from "./publish";
 import question from "./question";
 import upload from "./uploadfile";
+import rsaService from "./rsaservice";
 
 export default {
   question,
@@ -19,5 +20,6 @@ export default {
   loginout,
   githuboauth,
   hottopics,
-  upload
+  upload,
+  rsaService
 }

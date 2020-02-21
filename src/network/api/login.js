@@ -11,12 +11,11 @@ const loginout = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   loginLocal(username, password) {
-    return axios.post(base._commuback_ + '/login', {
-      params: {
-        username,
-        password
-      }
-    })
+    let params = {
+      username: username,
+      password: password
+    }
+    return axios.post(base._commuback_ + '/user/login', qs.stringify(params))
   },
 
   /**
@@ -24,7 +23,17 @@ const loginout = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   logout() {
-    return axios.get(base._commuback_ + '/logout')
+    return axios.get(base._commuback_ + '/user/logout')
+  },
+
+  register(username, password, phone) {
+    let params = {
+      username: username,
+      password: password,
+      phone: phone,
+    }
+    return axios.post(base._commuback_ + '/user/register', qs.stringify(params))
+
   }
 
 }

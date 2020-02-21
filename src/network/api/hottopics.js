@@ -18,8 +18,15 @@ const hottopics = {
    *
    * @returns {Promise<AxiosResponse<T>>}
    */
-  getHotTopics(params) {
-    return axios.get(base._commuback_ + '/hottopics', qs.stringify(params))
+  getHotTopics(id, tag, pageNum, pageSize, search) {
+    return axios.get(base._commuback_ + '/hottopics/'+ id, {
+      params: {
+        tag,
+        pageNum,
+        pageSize,
+        search
+      }
+    })
   }
 
 }

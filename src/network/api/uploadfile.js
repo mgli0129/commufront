@@ -10,12 +10,8 @@ const upload = {
    * @param id
    * @returns {Promise<AxiosResponse<T>>}
    */
-  upload(file) {
-    return axios.get(base._commuback_ + '/upload', {
-      params: {
-        file
-      }
-    })
+  upload(data) {
+    return axios.post(base._commuback_ + '/upload', data)
   }
 
 }

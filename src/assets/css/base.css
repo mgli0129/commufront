@@ -18,9 +18,10 @@
   box-sizing: border-box;
 }
 
+
 body {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-  user-select: none; /* 禁止用户鼠标在页面上选中文字/图片等 */
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  /*user-select: none; !* 禁止用户鼠标在页面上选中文字/图片等 *!*/
   -webkit-tap-highlight-color: transparent; /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */
   /*color: var(--color-text);*/
   width: 100vw;
@@ -31,6 +32,7 @@ body {
 a {
   color: var(--color-text);
   text-decoration: none;
+  cursor: pointer;
 }
 
 
@@ -71,4 +73,50 @@ a {
   padding-right: 0px;
 }
 
+.main-left {
+  border-right: 5px solid var(--color-background);
+  padding-left: 15px;
+  padding-right: 0;
+  background-color: var(--color-main);
+}
 
+.main-right {
+  padding-left: 0;
+  padding-right: 0;
+  border-left: 5px solid var(--color-background);
+  background-color: var(--color-main);
+}
+
+.main-right2 {
+  padding-left: 0;
+  padding-right: 0;
+  border-left: 5px solid var(--color-background);
+}
+
+.media-object {
+  width: 38px;
+  height: 38px;
+}
+
+.viewfontformat {
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #999;
+}
+
+.viewfontformat-dot-big {
+  FONT-SIZE: small;
+}
+
+.nav-right {
+  float: right;
+  margin-right: 30px;
+}
+
+.index-hr-top {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  border: 1px;
+  border-top: 2px solid #eee;
+}

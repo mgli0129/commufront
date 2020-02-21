@@ -11,11 +11,7 @@ const notification = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   readNotifyMessage(id) {
-    return axios.get( base._commuback_+'/notify', {
-      params: {
-        id
-      }
-    })
+    return axios.get( base._commuback_+'/notify/'+id)
   },
 
   /**

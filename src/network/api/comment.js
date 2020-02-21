@@ -11,11 +11,7 @@ const comment = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   getCommentList(id) {
-    return axios.get( base._commuback_+'/comment', {
-      params: {
-        id
-      }
-    })
+    return axios.get( base._commuback_+'/comment/'+ id)
   },
 
   /**
