@@ -69,7 +69,7 @@
       }
     },
     created(){
-      this.loadComments();
+      // this.loadComments();
     },
     methods: {
       formatTime(value){
@@ -85,6 +85,7 @@
       },
       collapseComments() {
         this.isCollapse = !this.isCollapse;
+        this.loadComments();
       },
       postSubComment(id) {
         this.$api.comment.comment({

@@ -3,7 +3,7 @@
     <h3><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;发现</h3>
     <hr class="index-hr-top">
     <questions-list-item v-for="(item, index) in questionsList"
-                         :key="index" :question="item" :common="common" />
+                         :key="index" :question="item" :common="common"/>
     <page :page-info="pageInfo" @toPage="toPage"></page>
   </div>
 </template>

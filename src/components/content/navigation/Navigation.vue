@@ -5,9 +5,9 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                   data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">MGCommunity</span>
+            <span class="sr-only">Community</span>
           </button>
-          <a class="navbar-brand" href="/">MGCommunity</a>
+          <a class="navbar-brand" href="/">Community</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="navbar-form navbar-left ">
@@ -149,7 +149,9 @@
       },
       githubLogin: function () {
         //github账户oAuth调用地址
-        const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://localhost:8887/callback&scope=user&state=1";
+        const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://"+process.env.VUE_APP_IP+":8887/callback&scope=user&state=1";
+        // const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://localhost:8887/callback&scope=user&state=1";
+        // console.log(githubUrl);
         //在新窗口调起github链接
         let gitWin = window.open(githubUrl);
         //最大计数器，60秒后跳出停止登录

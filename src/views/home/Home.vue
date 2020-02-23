@@ -6,7 +6,7 @@
         <div class="col-lg-1 col-md-1"></div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 main">
           <main-left class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-left" :questions-list="showQuestionsList"
-                     :page-info="showPageInfo" :common="common" @toPage="toPage"/>
+                     :page-info="showPageInfo" :common="common" @toPage="toPage" />
           <main-right class="col-lg-3 col-md-3 col-sm-12 col-xs-12 main-right" :hot-topics="hotTopics"/>
         </div>
         <div class="col-lg-1 col-md-1"></div>
@@ -52,11 +52,16 @@
     created() {
       this.loadQuestionList();
     },
+    // mounted(){
+    //   this.loadQuestionList();
+    // },
     methods: {
       loadQuestionList() {
         this.$api.question.getIndexByPage(this.pageNum, this.pageSize, this.search).then(res => {
           this.common = res.data.common;
           this.questionsList = res.data.questions;
+          console.log(this.questionsList);
+          console.log(res.data.questions);
           this.pageInfo = res.data.pageInfo;
           this.search = res.data.search;
           this.hotTopics = res.data.hotTopics;
@@ -79,7 +84,8 @@
       },
       logout() {
         this.loadQuestionList();
-      }
+      },
+
     }
   }
 </script>

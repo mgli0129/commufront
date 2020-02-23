@@ -109,6 +109,12 @@
     watch: {
       question: function (newQuestion) {
         this.questionId = newQuestion.id;
+      },
+      commentsList: function (newCommentsList) {
+        this.commentsList = newCommentsList;
+      },
+      common: function (newCommon) {
+        this.common = newCommon;
       }
     },
 
@@ -149,7 +155,7 @@
         if (this.userIsNotNull()) {
           return 'static' + this.common.avatarUrl;
         } else {
-          return 'static/imges/default_logo.jgp'
+          return 'static/imges/default_logo.jpg'
         }
       },
       loadCurName() {

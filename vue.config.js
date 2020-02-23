@@ -14,8 +14,9 @@ module.exports = {
         'router':'@/router',
         'store':'@/store',
         'common':'@/common'
-      }
+      },
     },
+
     plugins: [
       new webpack.ProvidePlugin({
         $: "jquery",
