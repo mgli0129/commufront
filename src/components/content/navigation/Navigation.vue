@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="navbar-form navbar-left ">
             <div class="form-group">
-              <input type="text" class="form-control" name="search" placeholder="搜索" v-model="searchValue">
+              <input type="text" class="form-control" name="search" placeholder="搜索" v-model="searchValue" v-on:blur="goSearch(searchValue)" @keyup.enter="goSearch(searchValue)">
             </div>
             <button @click="goSearch(searchValue)" class="btn btn-default">提交</button>
           </div>
@@ -149,6 +149,11 @@
       },
       githubLogin: function () {
         //github账户oAuth调用地址
+        // let addr = 'localhost';
+        // let addr = '47.115.31.4';
+        // if(process.env.NODE_ENV === 'production'){
+        //   addr = '47.115.31.4';
+        // }
         const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://"+process.env.VUE_APP_IP+":8887/callback&scope=user&state=1";
         // const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://localhost:8887/callback&scope=user&state=1";
         // console.log(githubUrl);
@@ -160,7 +165,8 @@
         let val = setInterval(() => {
           //查看后台是否已经获取token
           // console.log("等待生成cookie...[" + maxTime + "s] token=[" + this.$cookies.get("token") + "]");
-          if (this.$cookies.get("token") != null) {
+          // if (this.$cookies.get("token") != null) {
+          if (this.localStorage.getItem("Authorization") != null) {
             // console.log("新token=[" + this.$cookies.get("token") + "]");
             //当前页面为首页，通知父组件重新load数据
             if (this.$route.name === 'home') {
@@ -192,9 +198,13 @@
           });
           setTimeout(() => {
             //删除cookie里的token
-            if (this.$cookies.get("token") != null) {
-              this.$cookies.remove("token");
+            // if (this.$cookies.get("token") != null) {
+            //   this.$cookies.remove("token");
+            // }
+            if (this.localStorage.getItem("Authorization") != null) {
+              this.localStorage.removeItem("Authorization");
             }
+
             if (this.$route.name === 'home') {
               this.$emit("logout");
             } else {
