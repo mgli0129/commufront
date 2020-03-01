@@ -61,7 +61,6 @@
           this.common = res.data.common;
           this.question = res.data.question;
           this.commentsList = res.data.comments;
-          console.log(this.commentsList);
           this.questionRelated = res.data.questionRelated;
         })
       },

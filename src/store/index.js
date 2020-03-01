@@ -23,7 +23,7 @@ export default new Vuex.Store({
       //   expires: 1000*60*60*24
       // });
     },
-    removeAuthorization(){
+    removeAuthorization(state){
       state.Authorization = '';
       localStorage.removeItem('Authorization');
       // storage.removeItem('Authorization');

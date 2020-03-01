@@ -17,7 +17,7 @@
           <div class="form-group">
             <label for="inputPassword3" class="control-label">密码</label>
             <input type="password" class="form-control" name="password" id="inputPassword3"
-                   placeholder="请输入密码" v-model="password" maxlength="20">
+                   placeholder="请输入密码" v-model="password" maxlength="20" @keyup.enter="login()">
           </div>
 
           <div class="form-group">

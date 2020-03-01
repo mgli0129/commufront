@@ -12,7 +12,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="navbar-form navbar-left ">
             <div class="form-group">
-              <input type="text" class="form-control" name="search" placeholder="搜索" v-model="searchValue" v-on:blur="goSearch(searchValue)" @keyup.enter="goSearch(searchValue)">
+              <input type="text" class="form-control" name="search" placeholder="搜索" v-model="searchValue"
+                     v-on:blur="goSearch(searchValue)" @keyup.enter="goSearch(searchValue)">
             </div>
             <button @click="goSearch(searchValue)" class="btn btn-default">提交</button>
           </div>
@@ -154,7 +155,7 @@
         // if(process.env.NODE_ENV === 'production'){
         //   addr = '47.115.31.4';
         // }
-        const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://"+process.env.VUE_APP_IP+":8887/callback&scope=user&state=1";
+        const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://" + process.env.VUE_APP_IP + ":8887/callback&scope=user&state=1";
         // const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://localhost:8887/callback&scope=user&state=1";
         // console.log(githubUrl);
         //在新窗口调起github链接
@@ -193,25 +194,21 @@
         this.$api.loginout.logout().then(res => {
           this.$toast({
             message: "用户已退出登录！",
-            duration: 2000,
+            duration: 1000,
             forbidClick: true
           });
-          setTimeout(() => {
-            //删除cookie里的token
-            // if (this.$cookies.get("token") != null) {
-            //   this.$cookies.remove("token");
-            // }
-            if (this.localStorage.getItem("Authorization") != null) {
-              this.localStorage.removeItem("Authorization");
-            }
 
-            if (this.$route.name === 'home') {
-              this.$emit("logout");
-            } else {
-              // this.common = null;
-              this.$router.push("/home");
-            }
-          }, 1000);
+          //移除token
+          if (localStorage.getItem("Authorization") != null) {
+            this.$store.commit('removeAuthorization');
+          }
+          //跳转页面
+          if (this.$route.name === 'home') {
+            this.$emit("logout");
+          } else {
+            // this.common = null;
+            this.$router.push("/home");
+          }
 
         });
       }

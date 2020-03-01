@@ -60,8 +60,6 @@
         this.$api.question.getIndexByPage(this.pageNum, this.pageSize, this.search).then(res => {
           this.common = res.data.common;
           this.questionsList = res.data.questions;
-          console.log(this.questionsList);
-          console.log(res.data.questions);
           this.pageInfo = res.data.pageInfo;
           this.search = res.data.search;
           this.hotTopics = res.data.hotTopics;
