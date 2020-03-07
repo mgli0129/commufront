@@ -282,6 +282,8 @@
 
   .publish-taglib-tag {
     margin: 15px 15px 30px 15px;
+    word-break: break-all;
+    word-wrap: break-word;
   }
 
   .tag-style {
