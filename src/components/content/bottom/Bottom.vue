@@ -4,8 +4,9 @@
       <div>
         <a href="/">回到首页</a>
       </div>
+      <br>
       <div>
-        Copyright © 2019· MG社区 · 服务器赞助: PENDDING · 网站程序: MG · 粤ICP备********号
+        Copyright © 2020· 知否兮 - zhifouxi.cn · 粤ICP备20016438号
       </div>
     </div>
   </div>

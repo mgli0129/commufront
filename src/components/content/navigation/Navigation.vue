@@ -5,13 +5,15 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                   data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Community</span>
+            <span class="sr-only">Zhifouxi</span>
           </button>
-          <a class="navbar-brand" href="/">Community</a>
+          <a class="navbar-brand" href="/">
+            <img src="static/imges/logo.png" class="web-site-logo">
+          </a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <div class="navbar-form navbar-left ">
-            <div class="form-group">
+          <div class="navbar-form navbar-left navbar-left-margin">
+            <div class="form-group" >
               <input type="text" class="form-control" name="search" placeholder="搜索" v-model="searchValue"
                      v-on:blur="goSearch(searchValue)" @keyup.enter="goSearch(searchValue)">
             </div>
@@ -217,5 +219,16 @@
 </script>
 
 <style scoped>
+
+  .web-site-logo{
+    padding: 0;
+    margin:0;
+    width: 120px;
+    height: 50px;
+  }
+
+  .navbar-left-margin{
+    margin-left: 80px;
+  }
 
 </style>
