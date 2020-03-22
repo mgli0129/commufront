@@ -157,40 +157,43 @@
         // if(process.env.NODE_ENV === 'production'){
         //   addr = '47.115.31.4';
         // }
-        const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://" + process.env.VUE_APP_IP + ":8887/callback&scope=user&state=1";
+        const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://" + process.env.VUE_APP_IP + ":"+process.env.VUE_APP_PORT+"/callback&scope=user&state=1";
         // const githubUrl = "https://github.com/login/oauth/authorize?client_id=1063111966ccae7aa3e8&redirect_uri=http://localhost:8887/callback&scope=user&state=1";
         // console.log(githubUrl);
         //在新窗口调起github链接
-        let gitWin = window.open(githubUrl);
-        //最大计数器，60秒后跳出停止登录
-        let maxTime = 1;
-        //定时器：每秒检查一次
-        let val = setInterval(() => {
-          //查看后台是否已经获取token
-          // console.log("等待生成cookie...[" + maxTime + "s] token=[" + this.$cookies.get("token") + "]");
-          // if (this.$cookies.get("token") != null) {
-          if (this.localStorage.getItem("Authorization") != null) {
-            // console.log("新token=[" + this.$cookies.get("token") + "]");
-            //当前页面为首页，通知父组件重新load数据
-            if (this.$route.name === 'home') {
-              this.$emit("forceReflesh");
-            } else {
-              //当前页面不为首页，路由至首页，并刷新
-              this.common = null;
-              this.$router.push("/home");
-            }
-            //关闭github回调的新窗口
-            gitWin.close();
-            //退出定时器
-            clearInterval(val);
-          }
-          //计算器超过60秒，自动退出定时器，以免死循环
-          if (maxTime > 60) {
-            clearInterval(val);
-          }
-          //计算器自增
-          maxTime++;
-        }, 1000)
+        window.location.href = githubUrl;
+        // window.open(githubUrl,"_self");
+        // this.$router.go(0);
+        // let gitWin = window.open(githubUrl);
+        // //最大计数器，60秒后跳出停止登录
+        // let maxTime = 1;
+        // //定时器：每秒检查一次
+        // let val = setInterval(() => {
+        //   //查看后台是否已经获取token
+        //   // console.log("等待生成cookie...[" + maxTime + "s] token=[" + this.$cookies.get("token") + "]");
+        //   // if (this.$cookies.get("token") != null) {
+        //   if (this.localStorage.getItem("Authorization") != null) {
+        //     // console.log("新token=[" + this.$cookies.get("token") + "]");
+        //     //当前页面为首页，通知父组件重新load数据
+        //     if (this.$route.name === 'home') {
+        //       this.$emit("forceReflesh");
+        //     } else {
+        //       //当前页面不为首页，路由至首页，并刷新
+        //       this.common = null;
+        //       this.$router.push("/home");
+        //     }
+        //     //关闭github回调的新窗口
+        //     gitWin.close();
+        //     //退出定时器
+        //     clearInterval(val);
+        //   }
+        //   //计算器超过60秒，自动退出定时器，以免死循环
+        //   if (maxTime > 60) {
+        //     clearInterval(val);
+        //   }
+        //   //计算器自增
+        //   maxTime++;
+        // }, 1000)
       },
       logout() {
         this.$api.loginout.logout().then(res => {

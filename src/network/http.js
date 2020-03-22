@@ -94,6 +94,7 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(
   // 请求成功
   res => {
+    console.log(res);
     if (res.status === 200) {
       if (res.data.code === "000000") {
         return Promise.resolve(res.data);

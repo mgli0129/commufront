@@ -11,6 +11,10 @@ const githuboauth = {
    * @returns {Promise<AxiosResponse<T>>}
    */
   callback(code, state) {
+    let params = {
+      code: code,
+      state: state
+    }
     return axios.get(base._commuback_ + '/callback', {
       params: {
         code,

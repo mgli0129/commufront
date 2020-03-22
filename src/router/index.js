@@ -11,6 +11,7 @@ const Profile = () => import('views/profile/Profile');
 const NewReply = () => import('views/newreply/NewReply');
 const MyQuestions = () => import('views/myquestions/MyQuestions');
 const HotTopics = () => import('views/hottopics/HotTopics');
+const GithubOauth = () => import('views/user/GithubOauth');
 
 
 Vue.use(VueRouter)
@@ -84,6 +85,11 @@ const routes = [
     path: '/hottopics',
     name: 'hottopics',
     component: HotTopics
+  },
+  {
+    path: '/callback',
+    name: 'callback',
+    component: GithubOauth
   }
 ]
 
